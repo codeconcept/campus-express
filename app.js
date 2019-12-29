@@ -52,6 +52,16 @@ app.post("/api/good-resolutions", (req, res) => {
   res.send(resolution);
 });
 
+app.put("/api/good-resolutions/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const resolution = resolutions.find(r => r.id === id);
+  if (!resolution) {
+    return res.status(404).send(`Resolution with id ${id} not found`);
+  }
+  resolution.title = req.body.title;
+  res.status(200).send(resolution);
+});
+
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
