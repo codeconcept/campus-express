@@ -62,6 +62,16 @@ app.put("/api/good-resolutions/:id", (req, res) => {
   res.status(200).send(resolution);
 });
 
+app.delete("/api/good-resolutions/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const resolution = resolutions.find(r => r.id === id);
+  if (!resolution) {
+    return res.status(404).send(`Resolution with id ${id} not found`);
+  }
+  resolutions = resolutions.filter(r => r.id !== id);
+  res.status(200).send(`Resolution with id ${id} deleted`);
+});
+
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
