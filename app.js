@@ -14,12 +14,12 @@ app.get("/api/good-resolutions", (req, res) => {
   res.json(resolutions);
 });
 
-// to set an environment variable on Linux / Mac
-// export PORT = 3001
-// on Windows
-// set PORT = 3001
-// in PowerShell
-// $env:PORT = 3001
+app.get("/api/good-resolutions/:id", (req, res) => {
+  console.log("req.params", req.params);
+  const id = req.params.id;
+  res.send(`id ${id}`);
+});
+
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
