@@ -1,11 +1,9 @@
 const express = require("express");
-// https://www.npmjs.com/package/body-parser
-const bodyParser = require("body-parser");
 const utils = require("./utils");
 const app = express();
 
 // middleware that parses incoming requests with JSON payloads
-app.use(bodyParser.json());
+app.use(express.json());
 
 let resolutions = [
   { id: 1, title: "Moins de Netflix" },
