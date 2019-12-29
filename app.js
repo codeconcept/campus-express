@@ -1,8 +1,13 @@
 const express = require("express");
+// https://www.npmjs.com/package/body-parser
+const bodyParser = require("body-parser");
 const utils = require("./utils");
 const app = express();
 
-const resolutions = [
+// middleware that parses incoming requests with JSON payloads
+app.use(bodyParser.json());
+
+let resolutions = [
   { id: 1, title: "Moins de Netflix" },
   { id: 2, title: "Plus de sport" },
   { id: 3, title: "Aller se coucher avant 1h00 du matin" }
@@ -31,6 +36,21 @@ app.get("/api/good-resolutions/:id", (req, res) => {
   if (!resolution) {
     return res.status(404).send({ message: `No resolution with id ${id}` });
   }
+  res.send(resolution);
+});
+
+app.post("/api/good-resolutions", (req, res) => {
+  // in Postman set body to raw
+  // + drop down list to JSON
+  // + properly formated JSON { "title": "prendre l'air" }
+  console.log("body", req.body);
+  const id = Date.now();
+  const resolution = {
+    id,
+    title: req.body.title
+  };
+
+  resolutions = [...resolutions, resolution];
   res.send(resolution);
 });
 
