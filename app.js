@@ -14,7 +14,13 @@ app.get("/api/good-resolutions", (req, res) => {
   res.json(resolutions);
 });
 
-const PORT = 3000;
+// to set an environment variable on Linux / Mac
+// export PORT = 3001
+// on Windows
+// set PORT = 3001
+// in PowerShell
+// $env:PORT = 3001
+const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
